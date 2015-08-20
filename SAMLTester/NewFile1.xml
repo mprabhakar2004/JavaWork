@@ -1,0 +1,81 @@
+<saml2p:Response xmlns:saml2p="urn:oasis:names:tc:SAML:2.0:protocol"
+	Destination="https://manishdev.nuk9.com/appstore/saml2/vip_consumer"
+	ID="VIPLOGIN_38ffd08e3f791aeee4ccbfc7432c1442" InResponseTo="Manish1415533425"
+	IssueInstant="2014-11-09T11:47:35.771Z" Version="2.0">
+	<saml2:Issuer xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">login.vip.symantec.com
+	</saml2:Issuer>
+	<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+		<SignedInfo>
+			<CanonicalizationMethod
+				Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments" />
+			<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+			<Reference URI="#VIPLOGIN_38ffd08e3f791aeee4ccbfc7432c1442">
+				<Transforms>
+					<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+				</Transforms>
+				<DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+				<DigestValue>j3mvlXFixswgJgwYKmd1SYb/3pxgcTkwv9j/vko83s8=
+				</DigestValue>
+			</Reference>
+		</SignedInfo>
+		<SignatureValue>tO20gt92oeIeiWebC/6IXHE+vNFld4tsFUyDp4U4XiSGkaY7zlYX0VLUp8Q+6ZYpWEriVQmXI2DE
+			lV9ByBsf548lAfS+GdSrDS3VIm0CVwtSuLFlnMO4fNIOeK6B7K5TSH2OMrwcwPq3ZILHRVe1m/d2
+			plrp5DOxFDicD6wu++wPQ7RynXgV9x0hLPf8YiA27FoH4IpqD84FyFiHFM5hJUIE/F1MgKYobgV+
+			7AF7G2lqN0B6UbrK7qwah1TqNjeke8A9Mu/v1A+Nx2aWXKzhgGCBFQYq5karpHXW1SYMMv67V23m
+			DoOAKSnrf9tUdq67EnL39wfXLuzF6PT2uPSG4w==
+		</SignatureValue>
+		<KeyInfo>
+			<X509Data>
+				<X509Certificate>MIIEWTCCA0GgAwIBAgIQEbUMfXDbvJBJcxlYoJqZ1jANBgkqhkiG9w0BAQUFADBOMQswCQYDVQQG
+					EwJVUzEXMBUGA1UEChMOVmVyaVNpZ24sIEluYy4xJjAkBgNVBAMTHVZJUCBBdXRoZW50aWNhdGlv
+					biBTZXJ2aWNlIENBMB4XDTE0MDkwODAwMDAwMFoXDTE2MDkwNzIzNTk1OVowZzErMCkGA1UECwwi
+					UHJvZHVjdGlvbiBWSVAgTWFuYWdlciBTdXBlciBBZG1pbjEXMBUGA1UECgwOVmVyaVNpZ24sIElu
+					Yy4xHzAdBgNVBAMMFlZJUExvZ2luU3VwZXJBZG1pbjIwMTQwggEiMA0GCSqGSIb3DQEBAQUAA4IB
+					DwAwggEKAoIBAQC9/clWUVlmPY1QTwa3hNy85kEeW1y6y3dmj+LSCVe6IEMa39UB2Mbg/KDGm0mK
+					lhgwpWeAscZKGTytvTMoxTKlQdpmyFwadmauyY1uCwErAaeXzSk3be22JJy9JCiW/i5Z9T11Aua4
+					vASbkCvOKDh76oReGQ2PCM0GJ32i2HfDDOelyUgmkqmwnpPOP1yDvj6a+3HEsDHipMN8lLDE4iNe
+					5uoEBg0mhUO9aREVkd+wSMnMU/1ik+NtClfp0qJtubi6N8ffTtBKzch4UDA6znfaih49iTfBSU8y
+					m9JR9nUyjtN+hE/1KSYto8Dw7FYDYXpA4v9E2nM8L7U6nrsCk++5AgMBAAGjggEYMIIBFDAJBgNV
+					HRMEAjAAMAsGA1UdDwQEAwIFoDBgBgNVHR8EWTBXMFWgU6BRhk9odHRwOi8vb25zaXRlY3JsLnZl
+					cmlzaWduLmNvbS9WZXJpU2lnbkluY1ZJUEF1dGhlbnRpY2F0aW9uU2VydmljZS9MYXRlc3RDUkwu
+					Y3JsMB8GA1UdIwQYMBaAFGYriNfaKIy83o0CXzKgKWXESq6SMB0GA1UdDgQWBBQF2NtQ8sA9TYH6
+					J9iEiChG5a4sNjARBglghkgBhvhCAQEEBAMCB4AwEwYDVR0lBAwwCgYIKwYBBQUHAwIwMAYKYIZI
+					AYb4RQEGCwQiFiA4YjZhOWE5YWQ5NDQxYzI5ZjM0ZDYxNjE5MjI4NGVmYTANBgkqhkiG9w0BAQUF
+					AAOCAQEAPY+aH2RvVoCYQJ3eIWeu5p8mNgM3X7uYwqw8HJOQLQaxPFVOMzpU5njg+08JYGizgIes
+					atAXCSVaEqvQ1KFQ3uAwQ2+mc7/G+mh7EGbzegvGJS58rjWONFq9bKhvA5/xPm9ObbfUzicbph1d
+					3eZp2yNTPjvSlwGAdtTSHKQ+Cc52dyVaXf8z3Q1GZ85OoAe5OIrHLYLNLKNZXy+XRWANvh+089Bq
+					/LBf2Mow8qNSfhHsD+Jp7LuPmOrHu40TYOqopT6s6R0WoPlEPa+DBhVxJ8DVK7X6m1v99iGQ06Vl
+					mey4JsyCFoJFs5mXddpYEPv9sPoQTDfUD7VsYgg5ShcMvw==
+				</X509Certificate>
+			</X509Data>
+		</KeyInfo>
+	</Signature>
+	<saml2p:Status>
+		<saml2p:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success" />
+	</saml2p:Status>
+	<saml2:Assertion xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion"
+		ID="VIPLOGIN_3f4379717a0eccf5541f7d59d6af" IssueInstant="2014-11-09T11:47:35.771Z"
+		Version="2.0">
+		<saml2:Issuer>login.vip.symantec.com</saml2:Issuer>
+		<saml2:Subject>
+			<saml2:NameID Format="urn:oasis:names:tc:SAML:2.0:nameid-format:transient">admin</saml2:NameID>
+			<saml2:SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:bearer">
+				<saml2:SubjectConfirmationData
+					InResponseTo="Manish1415533425" NotOnOrAfter="2014-11-09T11:52:35.771Z"
+					Recipient="https://manishdev.nuk9.com/appstore/saml2/vip_consumer" />
+			</saml2:SubjectConfirmation>
+		</saml2:Subject>
+		<saml2:Conditions NotBefore="2014-11-09T11:42:35.771Z"
+			NotOnOrAfter="2014-11-09T11:52:35.771Z">
+			<saml2:AudienceRestriction>
+				<saml2:Audience>manishdev.nuk9.com.SP</saml2:Audience>
+			</saml2:AudienceRestriction>
+		</saml2:Conditions>
+		<saml2:AuthnStatement AuthnInstant="2014-11-09T11:47:35.771Z">
+			<saml2:AuthnContext>
+				<saml2:AuthnContextClassRef>urn:oasis:names:tc:SAML:2.0:ac:classes:unspecified
+				</saml2:AuthnContextClassRef>
+			</saml2:AuthnContext>
+		</saml2:AuthnStatement>
+	</saml2:Assertion>
+</saml2p:Response>

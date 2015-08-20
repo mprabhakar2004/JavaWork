@@ -1,0 +1,105 @@
+package com.test.saml.test;
+
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.StringReader;
+
+import org.apache.commons.codec.Charsets;
+import org.apache.commons.codec.binary.Base64;
+import org.opensaml.Configuration;
+import org.opensaml.DefaultBootstrap;
+import org.opensaml.saml2.core.Response;
+import org.opensaml.xml.XMLObject;
+import org.opensaml.xml.io.Unmarshaller;
+import org.opensaml.xml.parse.BasicParserPool;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.xml.sax.InputSource;
+
+/**
+ * Analyze and parse SAML response XML documents.
+ * Parsing use OpenSaml.
+ * Parser is singleton.
+ *
+ * @author mprabhakar2004@yahoo.com
+ */
+public class SamlAssertionParser {
+
+	private static SamlAssertionParser instance = null;
+
+	private final BasicParserPool parserPool;
+
+	public static SamlAssertionParser getParser() throws Exception {
+		if (instance == null) {
+			synchronized (SamlAssertionParser.class) {
+				if (instance == null)
+					instance = new SamlAssertionParser();
+			}
+		}
+		return instance;
+	}
+
+	private SamlAssertionParser() throws Exception {
+		DefaultBootstrap.bootstrap();
+
+		parserPool = new BasicParserPool();
+		parserPool.setNamespaceAware(true);
+	}
+
+	/**
+	 * @param is - XML document input stream (streams will be closed automatically)
+	 */
+	public Response parse(InputStream is) throws Exception {
+		try {
+			if (is == null)
+				throw new NullPointerException("Saml XML assertion input stream is null");
+
+			Element rootElement = null;
+			try {
+				Document doc = parserPool.parse(is);
+				rootElement = doc.getDocumentElement();
+
+			} catch (Exception e) {
+				throw new IllegalStateException("Saml XML assertion parsing error: " + e, e);
+			}
+
+			Unmarshaller unmarshaller = Configuration.getUnmarshallerFactory().getUnmarshaller(rootElement);
+			if (unmarshaller == null)
+				throw new IllegalStateException("Could not obtain a SAML unmarshaller");
+
+			XMLObject obj = unmarshaller.unmarshall(rootElement);
+			if (obj == null || !(obj instanceof Response))
+				throw new IllegalStateException("Unmarshaller return not SAML response");
+
+			return (Response)obj;
+
+		} finally {
+			if (is != null) {
+				try {
+					is.close();
+				} catch (Exception e) {}
+			}
+		}
+	}
+	public static void main(String[]args){
+		String input = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c2FtbDJwOlJlc3BvbnNlIHhtbG5zOnNhbWwycD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnByb3RvY29sIiBEZXN0aW5hdGlvbj0iaHR0cHM6Ly9tYW5pc2hkZXYubnVrOS5jb20vYXBwc3RvcmUvc2FtbDIvdmlwX2NvbnN1bWVyIiBJRD0iVklQTE9HSU5fOTI0ZmEzNDdkNzVhZmM5YjcwNDBmNzllOTA2NjljMzciIEluUmVzcG9uc2VUbz0iZWE1YmIyZmEtZmMwMC00YThmLWJkMjEtMGZiOTU1NGI3YmY2IiBJc3N1ZUluc3RhbnQ9IjIwMTQtMTItMDJUMDg6MzI6NTMuMTk0WiIgVmVyc2lvbj0iMi4wIj48c2FtbDI6SXNzdWVyIHhtbG5zOnNhbWwyPSJ1cm46b2FzaXM6bmFtZXM6dGM6U0FNTDoyLjA6YXNzZXJ0aW9uIj5sb2dpbi52aXAuc3ltYW50ZWMuY29tPC9zYW1sMjpJc3N1ZXI+PFNpZ25hdHVyZSB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnIyI+PFNpZ25lZEluZm8+PENhbm9uaWNhbGl6YXRpb25NZXRob2QgQWxnb3JpdGhtPSJodHRwOi8vd3d3LnczLm9yZy9UUi8yMDAxL1JFQy14bWwtYzE0bi0yMDAxMDMxNSNXaXRoQ29tbWVudHMiLz48U2lnbmF0dXJlTWV0aG9kIEFsZ29yaXRobT0iaHR0cDovL3d3dy53My5vcmcvMjAwMC8wOS94bWxkc2lnI3JzYS1zaGExIi8+PFJlZmVyZW5jZSBVUkk9IiNWSVBMT0dJTl85MjRmYTM0N2Q3NWFmYzliNzA0MGY3OWU5MDY2OWMzNyI+PFRyYW5zZm9ybXM+PFRyYW5zZm9ybSBBbGdvcml0aG09Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvMDkveG1sZHNpZyNlbnZlbG9wZWQtc2lnbmF0dXJlIi8+PC9UcmFuc2Zvcm1zPjxEaWdlc3RNZXRob2QgQWxnb3JpdGhtPSJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGVuYyNzaGEyNTYiLz48RGlnZXN0VmFsdWU+WFBtWE1pL2FaUTR0cVV1dTZmVTBkdHRwV1BZcGUzQzBTVm9wN0hadWYvST08L0RpZ2VzdFZhbHVlPjwvUmVmZXJlbmNlPjwvU2lnbmVkSW5mbz48U2lnbmF0dXJlVmFsdWU+TzZ5clA3bjBrS052SlErMWQ0VFBRc1JIR2NyWXdNMVczYW50WU9MS0pYRHhaSlQxRVVPaWxOQlhhVG9MTVFnSldHTDlYR25EaTA4ZAorWVpiTS9jZjVuODl3RHVSVmVUMml1RkpiL296bkt5Q2MwbDZYQ2xwT05UODNaMHJiM0xGMTdRcnR2UUlsZ3A4a1gxVmFqNXM3OVhCCkNHdXV0RitDQ3YwdnhZMUhka2pPWm5JZENTMnlnUWYwSytJYysyY2NEK2tsNmE3NVpRTnBSdS9sb243V05uNThWMlc4SmZ3SUpmdCsKVGJOM1BUdHBzU2dwOG9BMjdJZVNMNmhDUnNTQXMyY2pQdjRzS1Fjem9GQ05TemJELzYvOHBJRWdrZ2JaSDFTSjVhOFRITS8yVEJVMApTbGZXa3d4MVpIL2RDOUpGWkQzbHJ0ZTFKencwYmxRODNtV1lhZz09PC9TaWduYXR1cmVWYWx1ZT48S2V5SW5mbz48WDUwOURhdGE+PFg1MDlDZXJ0aWZpY2F0ZT5NSUlFV1RDQ0EwR2dBd0lCQWdJUUViVU1mWERidkpCSmN4bFlvSnFaMWpBTkJna3Foa2lHOXcwQkFRVUZBREJPTVFzd0NRWURWUVFHCkV3SlZVekVYTUJVR0ExVUVDaE1PVm1WeWFWTnBaMjRzSUVsdVl5NHhKakFrQmdOVkJBTVRIVlpKVUNCQmRYUm9aVzUwYVdOaGRHbHYKYmlCVFpYSjJhV05sSUVOQk1CNFhEVEUwTURrd09EQXdNREF3TUZvWERURTJNRGt3TnpJek5UazFPVm93WnpFck1Da0dBMVVFQ3d3aQpVSEp2WkhWamRHbHZiaUJXU1ZBZ1RXRnVZV2RsY2lCVGRYQmxjaUJCWkcxcGJqRVhNQlVHQTFVRUNnd09WbVZ5YVZOcFoyNHNJRWx1Cll5NHhIekFkQmdOVkJBTU1GbFpKVUV4dloybHVVM1Z3WlhKQlpHMXBiakl3TVRRd2dnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUIKRHdBd2dnRUtBb0lCQVFDOS9jbFdVVmxtUFkxUVR3YTNoTnk4NWtFZVcxeTZ5M2RtaitMU0NWZTZJRU1hMzlVQjJNYmcvS0RHbTBtSwpsaGd3cFdlQXNjWktHVHl0dlRNb3hUS2xRZHBteUZ3YWRtYXV5WTF1Q3dFckFhZVh6U2szYmUyMkpKeTlKQ2lXL2k1WjlUMTFBdWE0CnZBU2JrQ3ZPS0RoNzZvUmVHUTJQQ00wR0ozMmkySGZERE9lbHlVZ21rcW13bnBQT1AxeUR2ajZhKzNIRXNESGlwTU44bExERTRpTmUKNXVvRUJnMG1oVU85YVJFVmtkK3dTTW5NVS8xaWsrTnRDbGZwMHFKdHViaTZOOGZmVHRCS3pjaDRVREE2em5mYWloNDlpVGZCU1U4eQptOUpSOW5VeWp0TitoRS8xS1NZdG84RHc3RllEWVhwQTR2OUUybk04TDdVNm5yc0NrKys1QWdNQkFBR2pnZ0VZTUlJQkZEQUpCZ05WCkhSTUVBakFBTUFzR0ExVWREd1FFQXdJRm9EQmdCZ05WSFI4RVdUQlhNRldnVTZCUmhrOW9kSFJ3T2k4dmIyNXphWFJsWTNKc0xuWmwKY21semFXZHVMbU52YlM5V1pYSnBVMmxuYmtsdVkxWkpVRUYxZEdobGJuUnBZMkYwYVc5dVUyVnlkbWxqWlM5TVlYUmxjM1JEVWt3dQpZM0pzTUI4R0ExVWRJd1FZTUJhQUZHWXJpTmZhS0l5ODNvMENYektnS1dYRVNxNlNNQjBHQTFVZERnUVdCQlFGMk50UThzQTlUWUg2Cko5aUVpQ2hHNWE0c05qQVJCZ2xnaGtnQmh2aENBUUVFQkFNQ0I0QXdFd1lEVlIwbEJBd3dDZ1lJS3dZQkJRVUhBd0l3TUFZS1lJWkkKQVliNFJRRUdDd1FpRmlBNFlqWmhPV0U1WVdRNU5EUXhZekk1WmpNMFpEWXhOakU1TWpJNE5HVm1ZVEFOQmdrcWhraUc5dzBCQVFVRgpBQU9DQVFFQVBZK2FIMlJ2Vm9DWVFKM2VJV2V1NXA4bU5nTTNYN3VZd3F3OEhKT1FMUWF4UEZWT016cFU1bmpnKzA4SllHaXpnSWVzCmF0QVhDU1ZhRXF2UTFLRlEzdUF3UTIrbWM3L0crbWg3RUdiemVndkdKUzU4cmpXT05GcTliS2h2QTUveFBtOU9iYmZVemljYnBoMWQKM2VacDJ5TlRQanZTbHdHQWR0VFNIS1ErQ2M1MmR5VmFYZjh6M1ExR1o4NU9vQWU1T0lySExZTE5MS05aWHkrWFJXQU52aCswODlCcQovTEJmMk1vdzhxTlNmaEhzRCtKcDdMdVBtT3JIdTQwVFlPcW9wVDZzNlIwV29QbEVQYStEQmhWeEo4RFZLN1g2bTF2OTlpR1EwNlZsCm1leTRKc3lDRm9KRnM1bVhkZHBZRVB2OXNQb1FURGZVRDdWc1lnZzVTaGNNdnc9PTwvWDUwOUNlcnRpZmljYXRlPjwvWDUwOURhdGE+PC9LZXlJbmZvPjwvU2lnbmF0dXJlPjxzYW1sMnA6U3RhdHVzPjxzYW1sMnA6U3RhdHVzQ29kZSBWYWx1ZT0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOnN0YXR1czpTdWNjZXNzIi8+PC9zYW1sMnA6U3RhdHVzPjxzYW1sMjpBc3NlcnRpb24geG1sbnM6c2FtbDI9InVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDphc3NlcnRpb24iIElEPSJWSVBMT0dJTl8yY2IxOTVkNWE2ZGFjY2FlOTMzNWM3YzkzMWYzM2Q3IiBJc3N1ZUluc3RhbnQ9IjIwMTQtMTItMDJUMDg6MzI6NTMuMTk0WiIgVmVyc2lvbj0iMi4wIj48c2FtbDI6SXNzdWVyPmxvZ2luLnZpcC5zeW1hbnRlYy5jb208L3NhbWwyOklzc3Vlcj48c2FtbDI6U3ViamVjdD48c2FtbDI6TmFtZUlEIEZvcm1hdD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOm5hbWVpZC1mb3JtYXQ6dHJhbnNpZW50Ij5hZG1pbjwvc2FtbDI6TmFtZUlEPjxzYW1sMjpTdWJqZWN0Q29uZmlybWF0aW9uIE1ldGhvZD0idXJuOm9hc2lzOm5hbWVzOnRjOlNBTUw6Mi4wOmNtOmJlYXJlciI+PHNhbWwyOlN1YmplY3RDb25maXJtYXRpb25EYXRhIEluUmVzcG9uc2VUbz0iZWE1YmIyZmEtZmMwMC00YThmLWJkMjEtMGZiOTU1NGI3YmY2IiBOb3RPbk9yQWZ0ZXI9IjIwMTQtMTItMDJUMDg6Mzc6NTMuMTk0WiIgUmVjaXBpZW50PSJodHRwczovL21hbmlzaGRldi5udWs5LmNvbS9hcHBzdG9yZS9zYW1sMi92aXBfY29uc3VtZXIiLz48L3NhbWwyOlN1YmplY3RDb25maXJtYXRpb24+PC9zYW1sMjpTdWJqZWN0PjxzYW1sMjpDb25kaXRpb25zIE5vdEJlZm9yZT0iMjAxNC0xMi0wMlQwODoyNzo1My4xOTRaIiBOb3RPbk9yQWZ0ZXI9IjIwMTQtMTItMDJUMDg6Mzc6NTMuMTk0WiI+PHNhbWwyOkF1ZGllbmNlUmVzdHJpY3Rpb24+PHNhbWwyOkF1ZGllbmNlPm1hbmlzaGRldi5udWs5LmNvbS5TUDwvc2FtbDI6QXVkaWVuY2U+PC9zYW1sMjpBdWRpZW5jZVJlc3RyaWN0aW9uPjwvc2FtbDI6Q29uZGl0aW9ucz48c2FtbDI6QXV0aG5TdGF0ZW1lbnQgQXV0aG5JbnN0YW50PSIyMDE0LTEyLTAyVDA4OjMyOjUzLjE5NFoiPjxzYW1sMjpBdXRobkNvbnRleHQ+PHNhbWwyOkF1dGhuQ29udGV4dENsYXNzUmVmPnVybjpvYXNpczpuYW1lczp0YzpTQU1MOjIuMDphYzpjbGFzc2VzOnVuc3BlY2lmaWVkPC9zYW1sMjpBdXRobkNvbnRleHRDbGFzc1JlZj48L3NhbWwyOkF1dGhuQ29udGV4dD48L3NhbWwyOkF1dGhuU3RhdGVtZW50Pjwvc2FtbDI6QXNzZXJ0aW9uPjwvc2FtbDJwOlJlc3BvbnNlPg==";
+		String samlRequest = new String(Base64.decodeBase64(input));
+		InputStream inputStream = new ByteArrayInputStream(samlRequest.getBytes(Charsets.UTF_8));
+		
+		SamlAssertionParser samlassertionparser;
+		try {
+			samlassertionparser = SamlAssertionParser.getParser();
+			Response samlResponse = samlassertionparser.parse(inputStream);
+			System.out.println(samlResponse);
+			//System.out.println(samlResponse.getAssertions().get(0).getAttributeStatements().get(0).getAttributes().get(0).getAttributeValues().get(0) );
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+}
