@@ -25,29 +25,17 @@ public class Main {
     }
 
     private static int findSolution(long input) {
-        int result = 0;
+        int result;
         for (int i = 1; ; i++) {
-            String multiple = (i * input) + "";
+            BigInteger res = BigInteger.valueOf(input).multiply(BigInteger.valueOf(i));
+            String multiple = res.toString();
             if (multiple.matches("^4+0*")) {
                 int a = multiple.replaceAll("[^4]", "").length();
                 int b = multiple.replaceAll("[^0]", "").length();
-                result = 2 * a + b;
                 result = 2 * a + b;
                 break;
             }
         }
         return result;
-    }
-    private  static int countDigit(String str,char ch){
-        int count=0;
-        for(int i=0;i<str.length();i++){
-            if(str.charAt(i)==ch) {
-                int j = i;
-                while (j<str.length() && str.charAt(j++) == ch)
-                    count++;
-                return count;
-            }
-        }
-        return count;
     }
 }

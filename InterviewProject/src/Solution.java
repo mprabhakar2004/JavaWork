@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 class Solution {
-    public List<BigInteger> permutations = new ArrayList<BigInteger>();
+    public List<BigInteger> permutations = new ArrayList<>();
 
     public void generatePossibleNumbers(int length, int start, char[] str, boolean lastZero) {
         if (start >= length) {
@@ -57,7 +57,6 @@ class Solution {
 
     private void findSolution(long num){
         String input = num+"";
-//        Solution sol = new Solution();
         for(int i=input.length(); i < 100; i++) {
             char[] str = new char[i];
             str[0] = '4';
