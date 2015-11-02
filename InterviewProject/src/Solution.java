@@ -1,14 +1,15 @@
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 class Solution {
-    public List<Long> permutations = new ArrayList<Long>();
+    public List<BigInteger> permutations = new ArrayList<BigInteger>();
 
     public void generatePossibleNumbers(int length, int start, char[] str, boolean lastZero) {
         if (start >= length) {
-            Long val = Long.parseLong(new String(str));
+            BigInteger val = new BigInteger(new String(str));
             permutations.add(val);
             return;
         }
@@ -24,17 +25,18 @@ class Solution {
         }
     }
 
-    public Long findMultiple(long input){
-        Long[] longArray = new Long[permutations.size()];
+    public BigInteger findMultiple(long input){
+        BigInteger[] longArray = new BigInteger[permutations.size()];
         permutations.toArray(longArray);
         Arrays.sort(longArray);
 
-        for(Long str : longArray){
-            if(str%input == 0 ){
-                return str;
+        for(BigInteger element : longArray){
+            BigInteger []rem = element.divideAndRemainder(BigInteger.valueOf(input));
+            if(rem[1].intValue() == 0 ){
+                return element;
             }
         }
-        return 0L;
+        return BigInteger.valueOf(0L);
     }
 
     public static void main(String[] args) {
@@ -46,21 +48,22 @@ class Solution {
         for (int i = 0; i < t; i++) {
             inputArr[i] = in.nextInt();
         }
+        Solution sol= new Solution();
         for (int i = 0; i < t; i++) {
-            findSolution(inputArr[i]);
+            sol.findSolution(inputArr[i]);
         }
 
     }
 
-    private static void findSolution(long num){
+    private void findSolution(long num){
         String input = num+"";
-        Solution sol = new Solution();
+//        Solution sol = new Solution();
         for(int i=input.length(); i < 100; i++) {
             char[] str = new char[i];
             str[0] = '4';
-            sol.generatePossibleNumbers(i, 1, str, false);
-            if(sol.findMultiple(num) != 0L) {
-                String result = (sol.findMultiple(num)).toString();
+            generatePossibleNumbers(i, 1, str, false);
+            if(findMultiple(num).compareTo(BigInteger.valueOf(0L))!=0) {
+                String result = (findMultiple(num)).toString();
 
                 long a = countDigit(result, '4');
                 long b = countDigit(result, '0');
