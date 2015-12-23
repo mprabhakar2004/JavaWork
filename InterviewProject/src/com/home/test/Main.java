@@ -1,4 +1,4 @@
-package com.hom.test;
+package com.home.test;
 
 import java.math.BigInteger;
 import java.util.Scanner;
@@ -21,6 +21,10 @@ public class Main {
         for (int i = 0; i < t; i++) {
             System.out.println(findSolution(inputArr[i]));
         }
+
+        boolean b= true;
+        System.out.println(b);
+
 
     }
 
