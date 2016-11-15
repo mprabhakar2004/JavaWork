@@ -113,7 +113,7 @@ public class MyLinkedList {
         return mergeList;
     }
 
-    int GetNode(Node head,int n) {
+    int GetNthNode(Node head,int n) {
         Node p1,p2=p1=head;
         if(head==null)
             return 0;
