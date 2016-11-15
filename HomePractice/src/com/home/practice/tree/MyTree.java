@@ -55,6 +55,13 @@ public class MyTree {
 
     }
 
+    public void rightView(Node root){
+
+    }
+
+    public void leftView(Node root){
+
+    }
     static Node Insert(Node root,int value){
         Node newNode= new Node();
         newNode.right=newNode.left=null;
