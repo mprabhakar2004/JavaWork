@@ -1,3 +1,5 @@
+package com.home.practice.misc;
+
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -25,7 +27,7 @@ public class FizzBuzzTest {
 	 * Test case with random range
 	 */
 	public void testFizz_buzz_2() {
-		assertArrayEquals(FizzBuzz.fizz_buzz(10, 16),new String[]{"Buzz", "11", "Fizz", "13","14", "FizzBuzz"});
+		assertArrayEquals(FizzBuzz.fizz_buzz(10, 16),new String[]{"Buzz", "11", "Fizz", "13","14", "com.home.practice.misc.FizzBuzz"});
 	}
 	
 	@Test

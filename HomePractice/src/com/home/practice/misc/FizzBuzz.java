@@ -1,11 +1,11 @@
+package com.home.practice.misc;
+
 import java.util.Arrays;
 
 
 public class FizzBuzz {
 
-	/**
-	 * @param args
-	 */
+
 //	public static void main(String[] args) {
 //		assert Arrays.toString(fizz_buzz(1,1)).length() == 0;
 //		assert Arrays.toString(fizz_buzz(1,3)).equals(new String[]{"1","3"}):"failed";
@@ -27,7 +27,7 @@ public class FizzBuzz {
 		int k=0;
 		for (int i=start;i<end;i++){
 			if(i%3 == 0 && i%5== 0){
-				ar[k] = "FizzBuzz";
+				ar[k] = "com.home.practice.misc.FizzBuzz";
 			}else if(i%3 == 0){
 				ar[k] = "Fizz";
 			}else if(i%5 == 0){

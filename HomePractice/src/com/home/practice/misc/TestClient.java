@@ -1,4 +1,4 @@
-package com.home.practice;
+package com.home.practice.misc;
 
 import com.home.practice.linkedlist.MyLinkedList;
 import com.home.practice.linkedlist.Node;
