@@ -52,7 +52,6 @@ class Solution {
         for (int i = 0; i < t; i++) {
             sol.findSolution(inputArr[i]);
         }
-
     }
 
     private void findSolution(long num){
