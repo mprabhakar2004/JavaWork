@@ -5,7 +5,6 @@ import com.home.practice.linkedlist.Node;
 
 import java.util.*;
 
-
 public class TestClient {
 	static int solveMeFirst(int a, int b) {
 		return a + b;
@@ -61,30 +60,8 @@ public class TestClient {
 	}
 
 	public static void main(String[] args) {
-//		Scanner in = new Scanner(System.in);
-//        Scanner in1 = new Scanner(System.in);
 
-//		String s =  in.nextLine();
-//		isPanagram(s);
-//        System.out.print(removeDuplicateChars("ammanisha"));
-//
-//        Queue<Integer> queue = new LinkedList<Integer>();
-//        queue.offer(1);
-//        queue.offer(2);
-//        System.out.print(queue);
-//        int a =in.nextInt();
-//        double b= in.nextDouble();
-//        in.reset();
-//        String s = in1.nextLine();
-//        System.out.println(s);
-//        System.out.println(b);
-//        System.out.println(a);
-
-//        System.out.print(s);
-        String []sar = new String[5];
-        Arrays.fill(sar, "");
-        System.out.print(sar);
-
+		System.out.println(shortestPal("abab"));
 	}
 
     static String removeDuplicateChars(String userKeyword){
@@ -98,4 +75,34 @@ public class TestClient {
         }
         return modifiedKeyword;
     }
+
+	public  static String shortestPal(String s)
+	{
+		String rev_s = new StringBuilder(s).reverse().toString();
+		//use special character to avoid overlap
+		String l = s + "#" + rev_s;
+
+		int[] p = new int[l.length()];
+
+		//build KMP table.
+		//i -> suffix boundary
+		//j -> prefix boundary
+
+
+		for(int i=1; i<l.length(); i++)
+		{
+			//update prefix boundary to previous match position
+			int j = p[i-1];
+
+			//move to the last prefix boundary match
+			while(j>0 && l.charAt(i)!=l.charAt(j))
+				j = p[j-1];
+
+			//if prefix boundary matches suffix boundary,
+			//increase prefix length
+			if(l.charAt(i) == l.charAt(j)) p[i] = j + 1;
+		}
+
+		return rev_s.substring(0, s.length() - p[l.length() - 1]) + s;
+	}
 }

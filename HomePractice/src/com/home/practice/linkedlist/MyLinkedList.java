@@ -224,4 +224,20 @@ public class MyLinkedList {
         return head;
     }
 
+    Node add1ToList(Node head){
+        return null;
+    }
+
+    Node addList(Node list1,Node list2){
+        return null;
+    }
+
+    Node addList1(Node list1, Node list2){
+        return null;
+    }
+
+    Node insertNullInCircularSortedList(Node Head){
+        return null;
+    }
+
 }

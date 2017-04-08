@@ -1,5 +1,7 @@
 package com.home.practice.tree;
 
+import org.omg.CORBA.NO_IMPLEMENT;
+
 import java.util.*;
 
 /**
@@ -156,5 +158,52 @@ public class MyTree {
             }
         }
 
+    }
+
+    int noOfLeftNode(Node root){
+        if(root==null){
+            return 0;
+        }else if(root.left == null){
+            return noOfLeftNode(root.right);
+        }else {
+            return 1 + noOfLeftNode(root.left) + noOfLeftNode(root.right);
+        }
+    }
+
+    boolean isEachNodeHasOneChild(Node root){
+        return false;
+    }
+
+    private int minLenSumPathBST(final Node root, final int sum, final int len) {
+        if (root == null) {
+            return Integer.MAX_VALUE;
+        }
+
+        // find the remaining sum as we are including current node in the current path
+        final int remainingSum = sum - root.data;
+        // If remaining sum is zero and it is a leaf node then we found a complete path from root to a leaf.
+        if (remainingSum == 0 && root.left == null && root.right == null) {
+            return len + 1;
+        }
+        // If remaining sum is less than current node value then we search remaining in the left subtree.
+        else if (remainingSum <= root.data) {
+            int l = minLenSumPathBST(root.left, remainingSum, len + 1);
+            // if search in left subtree fails to find such path only then we search in the right subtree
+            if (l == Integer.MAX_VALUE) {
+                l = minLenSumPathBST(root.right, remainingSum, len + 1);
+            }
+
+            return l;
+        }
+        // If remaining sum is greater than current node value then we search remaining in the right subtree.
+        else {
+            int l = minLenSumPathBST(root.right, remainingSum, len + 1);
+            // if search in right subtree fails to find such path only then we search in the left subtree
+            if (l == Integer.MAX_VALUE) {
+                l = minLenSumPathBST(root.left, remainingSum, len + 1);
+            }
+
+            return l;
+        }
     }
 }
