@@ -50,4 +50,11 @@ public class ArrayProblem {
         return sum;
     }
 
+    public int maxDistanceBetweenNumber(int []ar, int num1, int num2){
+
+
+    	return 0;
+	}
+
+
 }
