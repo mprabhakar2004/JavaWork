@@ -8,30 +8,32 @@ import java.util.*;
 public class q1 {
     public static void main(String[] args) {
 
-        String s = "manish. kumar; manish, kumar";
+        String s = "kumar   manish. kumar; manish, kumar";
         System.out.println(maxMoney(2,1));
+        System.out.println(firstRepeatedWord1(s));
 
     }
 
     private static int maxMoney(int n, int k) {
-        long sum = 0;
-        boolean isFound = false;
-        int moduloConst = 1000000007;
+        long collectedSum = 0;
+        boolean flag = false;
+        int moduloConst = 1000000000;
+        moduloConst +=7;
         for (int index = 1; index <= n; index++) {
-            sum += index;
-            if (sum == k) {
-                isFound = true;
+            collectedSum += index;
+            if (collectedSum == k) {
+                flag = true;
                 break;
             }
         }
-        if (isFound) {
-            sum = ((long) n * (long) n + n) / 2;
-            sum--;
+        if (flag) {
+            collectedSum = ((long) n * (long) n + n) / 2;
+            collectedSum --;
         }
-        return (int) (sum % moduloConst);
+        return (int) (collectedSum % moduloConst);
     }
 
-    private static String firstRepeatedWord(String s) {
+    private static String firstRepeatedWord1(String s) {
         Map<String, Integer> strFreq = new HashMap<>();
         String[] strArr = s.split("(,)|(:)|(;)|(-)|(\\.)|(\\s+)|(\t)");
         for (String str : strArr) {
@@ -51,7 +53,7 @@ public class q1 {
     }
 
 
-    private static String firstRepeatedWord1(String s) {
+    private static String firstRepeatedWord(String s) {
         Map<String, Integer> strFreq = new HashMap<>();
 
         StringTokenizer st = new StringTokenizer(s, ",:;-.\t ");
