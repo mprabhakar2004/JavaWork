@@ -22,6 +22,34 @@ public class MyLinkedList {
         }
         return head;
     }
+
+    /**
+     * Delete all node having data value greater than x
+     *
+     * @param list
+     * @param x
+     * @return
+     */
+    Node removeNodes(Node list, int x) {
+
+        while (list != null && list.data > x) {
+            list = list.next;
+        }
+        if (list != null) {
+            Node prev = list;
+            Node curr = list;
+            while (curr != null) {
+                if (curr.data > x) {
+                    prev.next = curr.next;
+                } else {
+                    prev = curr;
+                }
+                curr = curr.next;
+            }
+        }
+        return list;
+    }
+
     Node Delete(Node head, int position){
         if(position==0){
             head=head.next;
@@ -48,6 +76,8 @@ public class MyLinkedList {
         System.out.println(head.data);
 
     }
+
+
     void Print(Node head){
         Node tmp= head;
         while(tmp!=null){
@@ -187,7 +217,7 @@ public class MyLinkedList {
     Node SortedInsert(Node head,int data) {
         Node newNode = new Node();
         newNode.data = data;
-        newNode.next = newNode.prev=null;
+        //newNode.next = newNode.prev=null;
         if(head==null)
             return newNode;
         Node tmp = head,cur=head;
@@ -196,7 +226,7 @@ public class MyLinkedList {
             tmp = tmp.next;
         }
         newNode.next = tmp;
-        newNode.prev= cur;
+        //newNode.prev= cur;
         cur.next=newNode;
         return head;
 
@@ -214,13 +244,13 @@ public class MyLinkedList {
             return head;
         Node cur = head;
         while(cur!=null){
-            tmp = cur.prev;
-            cur.prev= cur.next;
+            //tmp = cur.prev;
+            //cur.prev= cur.next;
             cur.next =tmp;
-            cur =cur.prev ;
+            //cur =cur.prev ;
         }
-        if(tmp!=null)
-            head= tmp.prev;
+        //if(tmp!=null)
+        //    head= tmp.prev;
         return head;
     }
 
