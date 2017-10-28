@@ -1,5 +1,7 @@
 package com.home.test;
 
+import com.home.hackerearth.timeinc.Test;
+
 import java.util.Arrays;
 
 /**
@@ -8,18 +10,34 @@ import java.util.Arrays;
 
 class TestAbst{
     public int a=1;
+    TestAbst(){}
+    public void fun(){
+
+    }
+    public void fun(String s){
+        System.out.println("string");
+    }
+
+    public void fun(Object o){
+        System.out.println("objetc");
+    }
 }
 
 class TestAbst1 extends TestAbst{
+
 public int a=2;
 }
 public class MiscTestClient {
     public static void main(String[] args) {
+        TestAbst obj=new TestAbst1();
+        obj.fun(null);
+        System.out.println(((TestAbst1)obj).a);
         int [] ar1={3,4,6,8};
         int [] ar2 = {1,2,5};
         merge(ar1,ar2);
         System.out.println(Arrays.toString(ar1));
         System.out.println(Arrays.toString(ar2));
+        System.out.println(countWays(6));
 
     }
 
@@ -49,5 +67,12 @@ public class MiscTestClient {
                 ar2 [j] = temp;
             }
         }
+    }
+
+    public static int countWays(int n){
+        if(n==1 || n==2){
+            return n;
+        }
+        return countWays(n-1) + countWays(n-2);
     }
 }
