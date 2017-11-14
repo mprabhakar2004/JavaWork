@@ -17,6 +17,9 @@ class TestAbst{
     public void fun(String s){
         System.out.println("string");
     }
+    public void fun(Integer s){
+        System.out.println("string");
+    }
 
     public void fun(Object o){
         System.out.println("objetc");
@@ -30,7 +33,7 @@ public int a=2;
 public class MiscTestClient {
     public static void main(String[] args) {
         TestAbst obj=new TestAbst1();
-        obj.fun(null);
+        //obj.fun(null);
         System.out.println(((TestAbst1)obj).a);
         int [] ar1={3,4,6,8};
         int [] ar2 = {1,2,5};
