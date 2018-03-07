@@ -32,6 +32,21 @@ public class TestClient {
         System.out.println("After dup removal Linked list data");
         head2 = ln.RemoveDuplicates(head2);
         ln.Print(head2);
+        head2 = ln.InsertNth(head2, 25, 1);
+        head2 = ln.InsertNth(head2, 25, 1);
+        head2 = ln.InsertNth(head2, 25, 1);
+        head2 = ln.InsertNth(head2, 25, 1);
+        head2 = ln.InsertNth(head2, 5, 1);
+        head2 = ln.InsertNth(head2, 15, 5);
+        head2 = ln.InsertNth(head2, 5, 1);
+        head2 = ln.InsertNth(head2, 15, 5);
+
+        System.out.println("\nBefore duplicate removal");
+        ln.Print(head2);
+        head2 = ln.deleteDuplicateInUnsortedList(head2);
+        System.out.println("\nAfter duplicate removal");
+        ln.Print(head2);
+
 
     }
 }
