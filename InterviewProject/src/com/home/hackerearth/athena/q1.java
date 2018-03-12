@@ -8,9 +8,8 @@ import java.util.*;
 public class q1 {
     public static void main(String[] args) {
 
-        String s = "kumar   manish. kumar; manish, kumar";
-        System.out.println(maxMoney(2,1));
-        System.out.println(firstRepeatedWord1(s));
+        String [] strings = {"{{}}","{(})","{{()}}"};
+        System.out.println(Arrays.toString(braces(strings)));
 
     }
 
@@ -74,4 +73,43 @@ public class q1 {
         }
         return null;
     }
+
+
+    static String[] braces(String[] values) {
+        String []res = new String[values.length];
+        for(int i=0;i<values.length;i++){
+            if(isBalanced(values[i])){
+                res[i] = "YES";
+            }else{
+                res[i] = "NO";
+            }
+        }
+        return res;
+    }
+
+    static Map<Character,Character> charMap = new HashMap<>();
+        static {
+            charMap.put('{', '}');
+            charMap.put('[', ']');
+            charMap.put('(', ')');
+        }
+    static boolean isBalanced(String str){
+
+
+        char []strArr = str.toCharArray();
+        Stack<Character> stack= new Stack<>();
+        for(int i=0;i<strArr.length;i++){
+            if(charMap.containsValue(strArr[i])){
+                if(!stack.isEmpty()){
+                    char ch = stack.pop();
+                    if(ch!= strArr[i])
+                        return false;
+                }else return false;
+            }else{
+                stack.push(charMap.get(strArr[i]));
+            }
+        }
+        return stack.isEmpty();
+    }
+
 }
