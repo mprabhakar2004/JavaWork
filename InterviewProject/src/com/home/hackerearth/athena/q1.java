@@ -11,6 +11,10 @@ public class q1 {
         String [] strings = {"{{}}","{(})","{{()}}"};
         System.out.println(Arrays.toString(braces(strings)));
 
+        int []a = {1234,567};
+        int []m = {2245, 156};
+        System.out.println(minStepsRequired(a,m));
+
     }
 
     private static int maxMoney(int n, int k) {
@@ -110,6 +114,30 @@ public class q1 {
             }
         }
         return stack.isEmpty();
+    }
+
+
+    /**
+     * Minimum steps required to convert a to m where any two operation required on each digit (increment or decrement by 1
+     *
+     * e.g.
+     * a =      {1234, 567}
+     * m =      {3435 , 478}
+     *
+     * res =     2+2+0+1  + 1+1+1 = 8
+     *
+     */
+    static int minStepsRequired(int []a,int []m){
+
+        int res = 0;
+        for(int i=0;i<a.length;i++){
+            char [] currA = String.valueOf(a[i]).toCharArray();
+            char [] currM = String.valueOf(m[i]).toCharArray();
+            for (int j=0;j<currA.length ;j++){
+                res += Math.abs(currA[j]- currM[j]);
+            }
+        }
+        return res;
     }
 
 }
