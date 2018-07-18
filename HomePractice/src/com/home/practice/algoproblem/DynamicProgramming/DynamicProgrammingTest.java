@@ -3,7 +3,6 @@ package com.home.practice.algoproblem.DynamicProgramming;
 public class DynamicProgrammingTest {
     public static void main(String[] args) {
         //System.out.println(numOfRequiredOperationToOneDynamicProgramming(10));
-        winner(1,5,null);
     }
 
 
@@ -48,47 +47,4 @@ public class DynamicProgrammingTest {
     //region Longest increasing sequence
 
     //endregion
-
-    static class LastMove{
-        public int num;
-    }
-
-    public static void winner(int pos1,int pos2, LastMove lastMove){
-
-        if (lastMove ==null && pos1+1 == pos2){
-            System.out.println("winner"+ 0);
-        }
-        if (lastMove ==null){
-            lastMove = new LastMove();
-            lastMove.num = 0;
-        }
-
-            if (lastMove.num == 0) {
-                lastMove.num=1;
-                if (pos1 + 1 < pos2) {
-                    //pos1++;
-                    winner(pos1+1, pos2,lastMove);
-                }
-
-                if (pos1+2 <pos1){
-                    //pos1+=2;
-                    winner(pos1+2,pos2,lastMove);
-                }
-            }else {
-                lastMove.num =0;
-                if (pos2-1 >pos1){
-                   // pos2--;
-                    winner(pos1,pos2-1,lastMove);
-                }
-                if (pos2-2 >pos1){
-                    //pos2 -=2;
-                    winner(pos1,pos2-2,lastMove);
-                }
-
-        }
-        if (pos1+1 == pos2){
-            System.out.println("winner"+ lastMove.num);
-        }
-    }
-
 }

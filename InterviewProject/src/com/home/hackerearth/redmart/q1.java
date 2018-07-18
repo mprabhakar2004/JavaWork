@@ -6,13 +6,13 @@ import java.util.*;
  * Write a program that works as a simple calculator that supports five operations: addition, subtraction, multiplication, division and modulo.
  Input
 
- There is an unknown number of tests. Each test consists of one-character symbol which corresponds to specific operation (+ addition, - subtraction,
- * multiplication, / division and % modulo) and two following integers. Each test will be separated by spaces and followed by a newline.
+ There is an unknown number of tests. Each HackerTest consists of one-character symbol which corresponds to specific operation (+ addition, - subtraction,
+ * multiplication, / division and % modulo) and two following integers. Each HackerTest will be separated by spaces and followed by a newline.
  * Number of tests doesn't exceed 100 and the result is less than 231. You can assume that there is no situation in which you would have to divide by 0.
 
  Output
 
- For each test you should print a single number being the result of each operation.
+ For each HackerTest you should print a single number being the result of each operation.
  Example
 
  Input:

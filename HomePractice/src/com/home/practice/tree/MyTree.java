@@ -137,6 +137,27 @@ public class MyTree {
 
     }
 
+    /**
+     * Get sum at level N, where level 1 = root
+     * @param root
+     * @param N
+     * @return
+     */
+     int getLevelSum(Node root, int N) {
+
+        // We're at the level we want to sum, return the value assumption is level 1 = root node
+        if (N == 1) {
+            return root.getData();
+        }
+
+        int sum = 0;
+        for (Node child : root.getChildren()) {
+            sum += getLevelSum(child, N - 1);
+        }
+        return sum;
+    }
+
+
     /***
      * Huffman decoding
      * @param S

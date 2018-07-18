@@ -17,6 +17,7 @@ import static java.lang.Math.abs;
 public class ArrayProblem {
     public static void main(String[] args) {
         int [] ar = new int[]{1,1,1,0,0};
+
         System.out.println(minimumSwapRequiredToMake1Together(ar));
     }
 
@@ -96,4 +97,6 @@ public class ArrayProblem {
         }
         return noOfOne - maxOneInSubArray;
     }
+
+
 }

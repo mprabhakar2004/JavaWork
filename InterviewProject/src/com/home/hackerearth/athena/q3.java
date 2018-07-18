@@ -6,7 +6,7 @@ public class q3 {
 
     public static void main (String[] args) {
 
-        System.out.println("test");
+        System.out.println("HackerTest");
         Map<String, Set<String>> taskDependencyMap = new HashMap<>();
         Set<String> taskSet = new HashSet<>(Arrays.asList("1","2","3","4","5"));
         taskDependencyMap.put("3", new HashSet<>(Arrays.asList("1","5")));

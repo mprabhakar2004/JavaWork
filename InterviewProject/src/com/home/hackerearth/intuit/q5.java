@@ -4,7 +4,7 @@ import java.io.*;
 
 public class q5 {
     public static void main(String[] args) {
-        String filename="test";
+        String filename="HackerTest";
         readFile(filename);
     }
 
