@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+        <script src="jquery-3.3.1.min.js"></script>
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+        <script src="myjs.js"></script>
+
+</head>
+<meta charset="UTF-8">
+<title>Title</title>
+</head>
+<body>
+<ul>
+    <li>
+        <div><a id="generate-secret" href="#"> Generate Secret</a></div>
+    </li>
+    <li>
+        <div><a id="generate-barcode" href="#"> Generate Bar Code</a></div>
+    </li>
+    <li>
+        <div>
+        <a id="generate-totp" href="#"> Generate OTP</a></div></li>
+    <li>
+        <div><a id="validate" href="#"> Validate OTP</a></div>
+    </li>
+
+</ul>
+<div id="OTPForm">
+    <div>Enter OTP : </div>
+    <div><input type="text" id="otpTxt"/> </div>
+    <div><input type="button" value="Validate OTP" id="btnValidate"></div>
+
+
+</div>
+<div id="result"></div>
+
+</body>
+</html>
