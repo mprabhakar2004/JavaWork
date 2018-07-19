@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/HomePractice/HomePractice.iml" filepath="$PROJECT_DIR$/HomePractice/HomePractice.iml" />
       <module fileurl="file://$PROJECT_DIR$/InterviewProject/InterviewProject.iml" filepath="$PROJECT_DIR$/InterviewProject/InterviewProject.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ScalaWork/ScalaWork.iml" filepath="$PROJECT_DIR$/ScalaWork/ScalaWork.iml" />
+      <module fileurl="file://$PROJECT_DIR$/secondfactorauthenticator/secondfactorauthenticator.iml" filepath="$PROJECT_DIR$/secondfactorauthenticator/secondfactorauthenticator.iml" />
     </modules>
   </component>
 </project>
