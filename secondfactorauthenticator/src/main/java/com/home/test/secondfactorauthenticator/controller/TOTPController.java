@@ -14,6 +14,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/totptester")
@@ -41,6 +43,7 @@ public class TOTPController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
         // Get your file stream from wherever.
         InputStream myStream = null;
