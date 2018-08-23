@@ -2,18 +2,18 @@ $(document).ready(function(){
     $("#OTPForm").hide();
     var pollInterval = null;
     $("#generate-secret").click(function(){
-
-        $.get("/totptester/generate-secret", function(data, status){
-                var html_text = "<b>Secrete Key :</b> " + data;
-                $("#result").html(html_text);
+        var userId = $("#userId").val();
+        $.post("/totptester/"+ userId+"/generate-secret",{}, function(data, status){
+                            var html_text = "<b>Secret Key :</b> " + data;
+                            $("#result").html(html_text);
         });
     });
 
     $("#generate-barcode").click(function(){
-
-            var html_text = "<img src='/totptester/bar-code/manish@2fa.com/manish.com'/>";
-            $("#result").html(html_text);
             clearInterval(pollInterval);
+            var userId = $("#userId").val();
+            var html_text = "<img src='/totptester/bar-code/"+ userId +"/www.sap.com'/>";
+            $("#result").html(html_text);
     });
 
 
@@ -25,16 +25,18 @@ $(document).ready(function(){
     });
 
     function getOtp(){
-        $.get("/totptester/totp", function(data, status){
+        var userId = $("#userId").val();
+        $.get("/totptester/totp/"+userId, function(data, status){
             var html_text = "<b>Current OTP :</b> " + data;
             $("#result").html(html_text);
         });
     }
 
     $("#btnValidate").click(function(){
-
+            clearInterval(pollInterval);
             var otp = $("#otpTxt").val();
-            $.post("/totptester/validate/"+otp,{}, function(data, status){
+            var userId = $("#userId").val();
+            $.post("/totptester/validate/"+ userId+"/"+otp,{}, function(data, status){
                     var html_text = "<b>Status :</b> " + data;
                     $("#result").html(html_text);
             });

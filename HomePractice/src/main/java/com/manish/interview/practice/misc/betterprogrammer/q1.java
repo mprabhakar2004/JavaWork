@@ -6,13 +6,34 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class q1 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
-        System.out.println(minSubArrayLen(6,new int[]{2,3,1,2,4,3}));
+        //System.out.println(minSubArrayLen(6,new int[]{2,3,1,2,4,3}));
 
+        System.out.println(Runtime.getRuntime().availableProcessors());
+
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("hi");
+            }
+        });
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("bye");
+            }
+        });
+        while (!executorService.awaitTermination(800, TimeUnit.MILLISECONDS)) {
+            executorService.shutdownNow();
+        }
 
         int count=0;
         int n= 6;

@@ -12,8 +12,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="HomePractice" target="1.5" />
-      <module name="InterviewProject" target="1.5" />
+      <module name="HomePractice" target="1.8" />
+      <module name="InterviewProject" target="1.8" />
       <module name="secondfactorauthenticator" target="1.8" />
     </bytecodeTargetLevel>
   </component>

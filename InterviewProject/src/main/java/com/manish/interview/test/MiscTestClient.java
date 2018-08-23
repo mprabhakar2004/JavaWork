@@ -1,6 +1,5 @@
 package com.manish.interview.test;
 
-import com.home.hackerearth.timeinc.Test;
 
 import java.util.Arrays;
 

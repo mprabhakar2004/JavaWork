@@ -1,7 +1,6 @@
 package com.manish.interview.hackerearth.dhruva;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -11,10 +10,8 @@ public class ApiVersionFinder {
     public static void main(String[] args) {
 
         ApiVersionFinder apiVersionFinder = new ApiVersionFinder();
-        File file = null;
-        FileReader fileReader = null;
         try (BufferedReader bufferedReader =
-                     new BufferedReader(new FileReader("input.txt"))) {
+                     new BufferedReader(new FileReader("/Users/i347911/input.txt"))) {
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -26,6 +23,8 @@ public class ApiVersionFinder {
 
         System.out.println(apiVersionFinder.getAppName());
     }
+
+
     class APIVersion{
         String apiName;
         String lowestVersion;
@@ -36,6 +35,7 @@ public class ApiVersionFinder {
             this.versionCount = versionCount;
         }
     }
+
     private  Map<String, APIVersion> apiVersionMap = new HashMap<>();
     private Map<String, String> appApiMap = new HashMap<>();
 
