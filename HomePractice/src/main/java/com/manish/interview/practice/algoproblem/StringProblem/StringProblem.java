@@ -1,20 +1,19 @@
 package com.manish.interview.practice.algoproblem.StringProblem;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Manishkumar on 02-02-2017.
  */
 class WordBreak{
-    static Set<String> strDict = new HashSet<>(Arrays.asList("Ideserve","learn","learning","platform"));
+    static Set<String> strDict = new HashSet<>(Arrays.asList("Ideserve","learn","learning","platform","I","love","India","face","book","facebook"));
     public static void wordBreak(String string){
         String result="";
         wordBreakUtil(string,result);
     }
 
     private static void wordBreakUtil(String string, String result) {
+
         for (int i=1;i<=string.length();i++){
             String prefix = string.substring(0,i);
             if (strDict.contains(prefix)){
@@ -123,7 +122,80 @@ public class StringProblem {
         return rev_s.substring(0, s.length() - p[l.length() - 1]) + s;
     }
 
+    static char map[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
     public static void main(String[] args) {
-        System.out.println(WordBreak.isWordBreakableDynamic("Ideservelearning"));
+        //System.out.println(WordBreak.isWordBreakableDynamic("Imlovefacebook"));
+//        WordBreak.wordBreak("Ilovefacebook");
+//       System.out.println(Arrays.toString(opGetShortestTokenization("Ifacebooklove", WordBreak.strDict )));
+
+
+
+        long n=1234567890;
+        String shortUrl = getShortUrl(n);
+        System.out.println(shortUrl);
+        System.out.println(getId(shortUrl));
+    }
+
+    /**
+     *  1011
+     *
+     *  1*2^3 + 0 *2^2 + 1*2^1 + 1*2^0
+     *
+     *
+     *  (((0*2 + 1)*2 +0)*2 +1)*2+1
+     *
+     * @param shortUrl
+     * @return
+     */
+
+    private static long getId(String shortUrl) {
+        long pow=1;
+        long result =0;
+        for (int i=shortUrl.length()-1;i>=0;i--){
+            if (shortUrl.charAt(i)>='a' && shortUrl.charAt(i)<='z') {
+                result += (shortUrl.charAt(i) - 'a')*pow;
+            }
+            else if (shortUrl.charAt(i)>='A' && shortUrl.charAt(i)<='Z'){
+                result += (shortUrl.charAt(i) - 'A' + 26)*pow;
+            }else {
+                result += (shortUrl.charAt(i) - '0'+52)*pow;
+            }
+            pow*=62;
+        }
+        return result;
+    }
+
+    private static String getShortUrl(long n) {
+        StringBuilder sb=new StringBuilder();
+        while (n>0){
+            sb.append(map[(int)n%62]);
+            n/=62;
+        }
+
+        return sb.reverse().toString();
+    }
+
+
+    public static String[] opGetShortestTokenization(String text,
+                                                       Set<String> vocabulary) {
+        //text = text.toLowerCase();
+        int left = 0;
+        int right = text.length();
+        List<String> result = new ArrayList<>();
+        boolean wordFound;
+        do  {
+            wordFound = false;
+            for (int i = 0; i <= right; i++) {
+                String word = text.substring(i, right);
+                if (vocabulary.contains(word)) {
+                    right = i;
+                    wordFound = true;
+                    result.add(word);
+                }
+            }
+        }while (wordFound);
+
+        Collections.reverse(result);
+        return result.toArray(new String[result.size()]);
     }
 }

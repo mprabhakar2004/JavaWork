@@ -18,7 +18,11 @@ public class ArrayProblem {
     public static void main(String[] args) {
         int [] ar = new int[]{1,1,1,0,0};
 
-        System.out.println(minimumSwapRequiredToMake1Together(ar));
+        //System.out.println(minimumSwapRequiredToMake1Together(ar));
+
+        spiralTraversal(new int[][]{{1,2,3,4,111},{5,6,7,8,112},{9,10,11,12,113},{13,14,15,16,114},{17,18,19,20,21}});
+        System.out.println("");
+        spiralTraversalAntiClockWise(new int[][]{{1,2,3,4,111},{5,6,7,8,112},{9,10,11,12,113},{13,14,15,16,114},{17,18,19,20,21}});
     }
 
     public static int maxABSDiffInArray(ArrayList<Integer> A) {
@@ -98,5 +102,105 @@ public class ArrayProblem {
         return noOfOne - maxOneInSubArray;
     }
 
+    /**
+     *  1   2   3   4   111
+     *  5   6   7   8   112
+     *  9   10  11  12  113
+     *  13  14  15  16  114
+     *  17  18  19  20  21
+     *
+     *
+     * @param ar
+     */
+    static  void spiralTraversal(int [][]ar){
+        int minCol = 0,maxCol = ar[0].length-1;
+        int minRow = 0,maxRow = ar.length-1;
+
+        while (minCol<=maxCol && minRow<=maxRow){
+            // -------->
+            for(int i=minCol; i<=maxCol;i++){
+                System.out.print(ar[minRow][i] + "  ");
+            }
+            minRow++;
+            /**
+             *      |
+             *      |
+             *      |
+             */
+            for (int i=minRow;i<=maxRow;i++){
+                System.out.print(ar[i][maxCol] + "  ");
+            }
+            maxCol--;
+            //<---------
+            for (int i=maxCol;i>=minCol;i--){
+                System.out.print(ar[maxRow][i] + "  ");
+            }
+            maxRow--;
+            /**
+             *      ^
+             *      |
+             *      |
+             */
+
+            for (int i = maxRow;i>=minRow ; i--){
+                System.out.print(ar[i][minCol] + "  ");
+            }
+            minCol++;
+        }
+    }
+
+
+    /**
+     *  1   2   3   4   111
+     *  5   6   7   8   112
+     *  9   10  11  12  113
+     *  13  14  15  16  114
+     *  17  18  19  20  21
+     *
+     *
+     * @param ar
+     */
+    static  void spiralTraversalAntiClockWise(int [][]ar){
+        int minCol = 0,maxCol = ar[0].length-1;
+        int minRow = 0,maxRow = ar.length-1;
+
+        while (minCol<=maxCol && minRow<=maxRow){
+
+            /**
+             *      |
+             *      |
+             *      |
+             *      \/
+             */
+            for (int i=minRow;i<=maxRow;i++){
+                System.out.print(ar[i][minCol] + "  ");
+            }
+            minCol++;
+
+            // -------->
+            for(int i=minCol; i<=maxCol;i++){
+                System.out.print(ar[maxRow][i] + "  ");
+            }
+            maxRow--;
+
+            /**
+             *      ^
+             *      |
+             *      |
+             */
+
+            for (int i = maxRow;i>=minRow ; i--){
+                System.out.print(ar[i][maxCol] + "  ");
+            }
+            maxCol--;
+
+            //<---------
+            for (int i=maxCol;i>=minCol;i--){
+                System.out.print(ar[minRow][i] + "  ");
+            }
+            minRow++;
+
+        }
+    }
 
 }
