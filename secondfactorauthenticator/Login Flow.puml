@@ -1,0 +1,23 @@
+@startuml
+User -> "Ariba Application": Authentication Request
+"Ariba Application" -> User: Login Form
+
+User -> "Ariba Application": Username + password
+"Ariba Application"-> Database: Authenticate User
+
+alt Authentication Successful
+    "Ariba Application"->Database: Get User detail
+    "Ariba Application" -> User: Redirect to form where user can enter TOPT
+    User -> "Ariba Application": Provide TOPT from Google Authenticator
+    "Ariba Application"-> "Vault": Get Master Key
+    "Ariba Application"->"Ariba Application": Decrypt user secrete key
+    "Ariba Application"->"Ariba Application": Generate TOPT using secrete key
+    "Ariba Application"->"Ariba Application": Matched it with user entered TOPT
+    "Ariba Application"-> Database: Update last login detail for user/device
+    "Ariba Application"-> User: Redirect to Dashboard
+else Authentication Failed
+    "Ariba Application"-> User: Redirect to Login page with error message
+end
+
+
+@enduml

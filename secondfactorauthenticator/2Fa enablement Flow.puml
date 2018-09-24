@@ -1,0 +1,20 @@
+@startuml
+User -> "Ariba Application": Login to Application using username/password
+"Ariba Application"->User: Successfully Authenticated
+User-> "Ariba Application": Navigate to User Perference page
+group Enable 2FA
+User -> "Ariba Application": Select Enable 2FA radio button
+group Genearte QR code
+"Ariba Application"-> "Ariba Application": Generate Random secrete Key
+"Ariba Application"-> "Ariba Application": Generate QR code using secrete key
+end
+User-> "Ariba Application": Scan QR code using Google Authenticator app
+"Ariba Application"->User: Form to enter TOPT to make sure QR has been scanned
+User-> "Ariba Application": Enter TOPT and click on Validate & Save
+"Ariba Application"->"Ariba Application": Validate TOPT
+"Ariba Application"->"Vault": Get Master encryption key
+"Ariba Application"->"Ariba Application": Encrypt the secrete key using Master key
+"Ariba Application"-> "Database": Save user preference in DB along with encrypted secret key \
+and device detail
+end
+@enduml
