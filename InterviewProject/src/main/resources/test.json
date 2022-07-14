@@ -1,0 +1,71 @@
+{
+  "id": "403X224A522679DE",
+  "type": "post",
+  "time": 1573889090000,
+  "publisher": {
+    "name": "AppforAndroid",
+    "id": "APPID403X"
+  },
+  "permalink": "http://domain.com/posts/403X224A522679DE",
+  "title": "SprinklrIntegration!",
+  "message": "JoinusincelebratingthelaunchofourSprinklrintegration!@sprinklr@JC_Doe#SCPartnerdayhttp://attachedlink.com/attached/link",
+  "likes_count": 0,
+  "location": {
+    "type": "place",
+    "name": "CollegeStation",
+    "country": "UnitedStates",
+    "country_code_iso2": "US",
+    "coordinates": [
+      30.6280,
+      96.3344
+    ]
+  },
+  "mentioned_users": [
+    {
+      "type": "page",
+      "id": "1855786545",
+      "username": "sprinklr",
+      "screen_name": "SprinklrInc"
+    },
+    {
+      "type": "person",
+      "id": "8975816231",
+      "username": "JC_Doe",
+      "screen_name": "JohnChambersDoe"
+    }
+  ],
+  "links": [
+    {
+      "url_shortened": "http://bit.ly/s2C1e",
+      "url_expanded": "http://attachedlink.com/attached/link",
+      "thumbnail": "http://attachedlink.com/media/link/thumb",
+      "title": "NewYorkWinter",
+      "description": "ManypeoplewouldarguethatwinteristhebesttimetovisitNewYork.Why?Well,somemajoreventstakeplaceinNewYorkinthewinter"
+    }
+  ],
+  "user": {
+    "type": "person",
+    "id": "1855784545",
+    "permalink": "https://www.domain.com/person_handle",
+    "username": "person_handle",
+    "screen_name": "JaneDoe",
+    "gender": "female",
+    "age": 34,
+    "bio": "SeniorHeadofManagement.ParttimeYoutuber.2015AOEChampion.",
+    "image": "https://",
+    "followers_count": 15,
+    "following_count": 15,
+    "post_count": 24,
+    "verified": false,
+    "location": {
+      "type": "place",
+      "name": "CollegeStation,TX",
+      "country": "UnitedStates",
+      "country_code_iso2": "US",
+      "coordinates": [
+        30.6280,
+        96.3344
+      ]
+    }
+  }
+}
